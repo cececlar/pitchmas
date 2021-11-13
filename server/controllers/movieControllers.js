@@ -16,7 +16,7 @@ const getSeedDataByTerm = async (searchTerm) => {
       `${TMDB_API_URL}/search/movie?api_key=${TMDB_API_KEY}&language=en-US&page=1&include_adult=false&query=${searchTerm}`
     );
     // New array with only relevant data for each movie
-    data = refineData(data.data.results);
+    data = refineSeedData(data.data.results);
     // Updated 1d array of movie data
     aggregateData = aggregateData.concat(...data);
   } catch (e) {
@@ -24,7 +24,7 @@ const getSeedDataByTerm = async (searchTerm) => {
   }
 };
 
-const refineData = (array) => {
+const refineSeedData = (array) => {
   const newArray = array.map((obj) => {
     const updatedObj = {
       id: obj.id,
