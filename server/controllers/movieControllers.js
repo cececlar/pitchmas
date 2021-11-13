@@ -3,17 +3,25 @@ const axios = require("axios");
 const Movie = require("../db/models/movie");
 
 exports.getAllMovies = async (req, res) => {
-  const movies = await Movie.find();
-  if (movies) {
+  try {
+    const movies = await Movie.find();
     res.json(movies);
-  } else {
-    res.status(500).json({ Error: "No movies found." });
+  } catch (e) {
+    res.json({ Error: e.message });
   }
 };
 
 exports.createMovie = async (req, res) => {
-  res.json("POST request made to /api/movies.");
+  try {
+    const { title, overview } = req.body;
+    const newMovie = new Movie({ title, overview });
+    await newMovie.save();
+    res.status(201).json(newMovie);
+  } catch (e) {
+    res.json({ Error: e.message });
+  }
 };
+
 // Example of how to spawn a python child process and feed data from req.query
 // TODO: Update code block so that all movie overviews are fed to python child process for eventually creating a corpus of text made up of Christmas movie overviews.
 
