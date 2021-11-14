@@ -183,7 +183,7 @@ def printD(D,indent):
 
 # given a filename, returns a dictionary of words with info about that filename
 def makedict(text):
-    print("Making dictionary...")
+    # print("Making dictionary...")
     sentences = getSentences(text)
     dictionary = {}
     for s in sentences:
@@ -236,9 +236,9 @@ def predwrite(D,num_opts,wtlist):
                                                   ))
 
         for n in range(0,num_opts):                                 #print the options for the user
-            print(str(n+1) + " = " + str(rankings[n][0]))
+            print(str(rankings[n][0]))
 
-        response = input('Choose a word from above.\n')
+        response = input('Choose a word from above.')
         if response.isdigit():
             response = int(response)
         print("\n")
