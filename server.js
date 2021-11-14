@@ -22,12 +22,24 @@ app.use("/api/overviews", overviewRoutes);
 
 io.on("connection", (socket) => {
   const child = spawn("python", ["./script.py", overviews]);
+  let optionsArray = [];
 
   // child.stdout.pipe(process.stdout);
   // child.stderr.pipe(process.stderr);
   // process.stdin.pipe(child.stdin);
   child.stdout.on("data", (data) => {
-    io.emit("options", `${data}`);
+    console.log(data.toString());
+    optionsArray = data.toString().split("\n");
+    optionsArray.pop();
+    console.log(optionsArray);
+    io.emit("options", optionsArray);
+  });
+
+  socket.on("selected word", (data) => {
+    const index = optionsArray.findIndex((element) => element === data);
+    console.log("Word selected: ", data);
+    console.log("Index of word selected: ", index);
+    child.stdin.write(`${String(index)}\n`);
   });
 });
 

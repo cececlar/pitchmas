@@ -201,12 +201,12 @@ def predwrite(D,num_opts,wtlist):
 
     while 1:
         rankings = ranked(baseline)
-        if len(linelog) == 0:                   # if nothing written, predict with no prior context, using whole-dict freqs
-            rankings = rankings                 # do not change from the baseline
+        if len(linelog) == 0: # if nothing written, predict with no prior context, using whole-dict freqs
+            rankings = rankings # do not change from the baseline
         if len(linelog) == 1:
             prev1 = linelog[0]
             if prev1 in D:
-                subdict1 = D[prev1][1]         #subdict of words coming 1 after the first chosen word
+                subdict1 = D[prev1][1] #subdict of words coming 1 after the first chosen word
                 rankings = ranked(weightedCombination([baseline,subdict1],[wtlist[0],wtlist[1]]))
         if len(linelog) > 1:
             prev1 = linelog[cur - 1]
@@ -231,43 +231,40 @@ def predwrite(D,num_opts,wtlist):
                 subdict2_1 = {}
                 if prev1 in D[prev2][1]:
                     subdict2_1 = D[prev2][1][prev1][1]  # subdict of words following conjunction of ([cur-2],[cur-1])
-                rankings = ranked(weightedCombination([baseline, subdict1, subdict2, subdict2_1],
-                                                  [wtlist[0], wtlist[1], wtlist[2], wtlist[3]]
-                                                  ))
+                rankings = ranked(weightedCombination([baseline, subdict1, subdict2, subdict2_1], [wtlist[0], wtlist[1], wtlist[2], wtlist[3]]))
 
-        for n in range(0,num_opts):                                 #print the options for the user
+        for n in range(0,num_opts): #print the options for the user
             print(str(rankings[n][0]))
 
         response = input('Choose a word from above.')
         if response.isdigit():
             response = int(response)
-        print("\n")
-        if response >= 1 and response <= num_opts:
-            linelog = linelog + [str(rankings[response-1][0])]
-            cur += 1
-            printSentence(fullLog+linelog)
-        elif response == 0:
-            print('Final output: ')
-            fullLog = fullLog + linelog
-            print(' '.join(fullLog))
-            return linelog
-        elif response == 'x': #todo handle empty string case
-            del linelog[-1] # remove last element of current line
-            cur -= 1
-            printSentence(fullLog+linelog)
-        elif response == '.' or response=='?':        # starts a new sentence
-            linelog = linelog + [response]
-            fullLog = fullLog + linelog
-            linelog = []
-            cur = 0
-            printSentence(fullLog+linelog)
-        elif isinstance(response, str):
-            linelog = linelog + [response]
-            cur += 1
-            printSentence(fullLog+linelog)
-        else:
-            print("Invalid input. Choose a number between 1 and " + str(num_opts) + " or enter a word present in the source")
-            printSentence(fullLog+linelog)
+        if response >= 0 and response <= num_opts:
+            linelog = linelog + [str(rankings[response][0])]
+            # cur += 1
+            # printSentence(fullLog+linelog)
+        # elif response == 0:
+        #     print('Final output: ')
+        #     fullLog = fullLog + linelog
+        #     print(' '.join(fullLog))
+        #     return linelog
+        # elif response == 'x': #todo handle empty string case
+        #     del linelog[-1] # remove last element of current line
+        #     cur -= 1
+        #     printSentence(fullLog+linelog)
+        # elif response == '.' or response=='?':        # starts a new sentence
+        #     linelog = linelog + [response]
+        #     fullLog = fullLog + linelog
+        #     linelog = []
+        #     cur = 0
+        #     printSentence(fullLog+linelog)
+        # elif isinstance(response, str):
+        #     linelog = linelog + [response]
+        #     cur += 1
+        #     printSentence(fullLog+linelog)
+        # else:
+        #     print("Invalid input. Choose a number between 1 and " + str(num_opts) + " or enter a word present in the source")
+        #     printSentence(fullLog+linelog)
 
     print('\n')
     return
