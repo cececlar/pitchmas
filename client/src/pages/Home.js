@@ -77,50 +77,50 @@ export default class Home extends React.Component {
             defaultValue={this.state.overview}
             onKeyDown={this.handleKeyDown}
           ></textarea>
+          <div className="next-word__container">
+            <button
+              type="button"
+              className="next-word__button next-word__button--punctuation"
+              value="."
+              onClick={this.handleSelect}
+            >
+              .
+            </button>
+            <button
+              type="button"
+              className="next-word__button next-word__button--punctuation"
+              value="?"
+              onClick={this.handleSelect}
+            >
+              ?
+            </button>
+            <button
+              type="button"
+              className="next-word__button next-word__button--punctuation"
+              value="!"
+              onClick={this.handleSelect}
+            >
+              !
+            </button>
+            {this.state.options.length > 0 &&
+              this.state.options.map((option, index) => {
+                return (
+                  <button
+                    type="button"
+                    className="next-word__button"
+                    key={index}
+                    value={option}
+                    onClick={this.handleSelect}
+                  >
+                    {option}
+                  </button>
+                );
+              })}
+          </div>
           <button className="new-movie__button" type="submit">
             Submit
           </button>
         </form>
-        <div className="next-word__container">
-          <button
-            type="button"
-            className="next-word__button next-word__button--punctuation"
-            value="."
-            onClick={this.handleSelect}
-          >
-            .
-          </button>
-          <button
-            type="button"
-            className="next-word__button next-word__button--punctuation"
-            value="?"
-            onClick={this.handleSelect}
-          >
-            ?
-          </button>
-          <button
-            type="button"
-            className="next-word__button next-word__button--punctuation"
-            value="!"
-            onClick={this.handleSelect}
-          >
-            !
-          </button>
-          {this.state.options.length > 0 &&
-            this.state.options.map((option, index) => {
-              return (
-                <button
-                  type="button"
-                  className="next-word__button"
-                  key={index}
-                  value={option}
-                  onClick={this.handleSelect}
-                >
-                  {option}
-                </button>
-              );
-            })}
-        </div>
       </div>
     );
   }
