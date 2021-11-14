@@ -40,7 +40,7 @@ cd client && npm start
 
 THe purpose of Pitchmas is twofold:
 
-- 1. Practice creating predictive text functionality for a specific corpus.
-- 2. Generate holiday movie pitch ideas that poke fun of the genre's most cringeworthy tropes.
+1. Practice creating predictive text functionality for a specific corpus.
+2. Generate holiday movie pitch ideas that poke fun of the genre's most cringeworthy tropes.
 
 The app was inspired by the [Botnik Studios Predictive Writer](https://botnik.org/apps/writer/). It uses a modified version of [Botnik contributor Jamie Brew's open source Python script](https://github.com/jbrew/pt-write) to generate predictive text options for fake holiday movie pitches. Seed data for plot overviews was pulled from [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction) and parsed by the Python script to generate a list of suggestions for the next word in user-generated movie pitches.
