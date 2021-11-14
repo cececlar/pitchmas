@@ -1,20 +1,55 @@
-import sys 
-import operator
-import string
-import textwrap
-import os
-text = sys.argv[1]
+#The MIT License (MIT)
+#Copyright (c) 2016 Jamie Brew
+
+#Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+# documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+#The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+# WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+# OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+# OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+# This script takes a source material and stores each unique word in it as an entry in a python dictionary.
+
+# Each entry in the dictionary (for word w) is a tuple of (frequency(w), subdictionary1, subdictionary2)
+
+# subdictionary1 is a dictionary of all words that have occurred one after w
+# subdictionary2 is a dictionary of all words that have occurred two after w
+
+# Subdictionary entries have the exact same format as dictionary entries
+# e.g. D['foo'][sub1]['zoo'] is a tuple of (frequency(zoo|foo),subdict1,subdict2)
+# Where those subdictionaries are now dictionaries of words that follow 'zoo' GIVEN THAT 'zoo' followed 'foo'
+
 __author__ = 'jamie brew'
 
-freq = 0    #frequency
-sub1 = 1    #possible next words
-sub2 = 2    #possible words after next word
+import sys 
+import operator
+import textwrap
+text = sys.argv[1]
 
-vision = 2                  # this defines how many words back the program looks. in this iteration of the program, it has to be 2
-weight_baseline = .01       # weight given to the list of most frequent words in the overall dictionary
-weight_2 = 1                 # weight given to the list of words occurring most frequently 2 after the 2nd most recent word typed
-weight_1 = 3                 # weight given to the list of words occurring most frequently 1 after the 1st most recent word typed
-weight_21 = 4                # weight given to the list of words occurring most frequently after the conjunction of 1st and 2nd
+# shorthand for indexing into the dictionary
+freq = 0 #frequency
+sub1 = 1 #possible next words
+sub2 = 2 #possible words after next word
+
+# The predwrite function operates on the constructed nested dictionary to come up with a list of suggestions
+# for the likely next word.
+
+# In generating its list of top suggestions, the program uses a weighted combination of
+# 1. words likely to follow the most recent word you typed
+# 2. words likely to follow 2 after the second most recent word
+# 3. words likely to satisfy both of the above conditions (i.e., following that 2-gram sequence)
+# 4. the baseline frequency of words in the source
+
+vision = 2 # defines how many words back the program looks. in this iteration of the program, it has to be 2
+weight_baseline = .01 # weight given to the list of most frequent words in the overall dictionary
+weight_2 = 1 # weight given to the list of words occurring most frequently 2 after the 2nd most recent word typed
+weight_1 = 3 # weight given to the list of words occurring most frequently 1 after the 1st most recent word typed
+weight_21 = 4 # weight given to the list of words occurring most frequently after the conjunction of 1st and 2nd
 default_wts = [.0000001,2,1,10] # this is passed to predwrite, then to weightedCombination
 
 # prints the log in a readable way
@@ -23,8 +58,6 @@ def printSentence(log):
     for w in log:
         toPrint = toPrint + " " + w
     print(textwrap.fill(toPrint,80))
-
-# printSentence(text)
 
 #takes a list of dictionaries and a list of associated weights, returns a single list
 def weightedCombination(dlist,wtlist):

@@ -3,14 +3,16 @@ if (process.env.NODE_ENV !== "production") require("dotenv").config();
 const app = require("./server/app"),
   PORT = process.env.PORT,
   overviews = require("./overviews"),
-  spawn = require("child_process").spawn;
+  { spawn } = require("child_process");
 
 const createDict = () => {
-  const process = spawn("python", ["./script.py", overviews]);
+  const child = spawn("python", ["./script.py", overviews]);
 
-  process.stdout.on("data", (data) => {
-    console.log(data.toString());
-  });
+  child.stdout.pipe(process.stdout);
+  child.stderr.pipe(process.stderr);
+  process.stdin.pipe(child.stdin);
+
+  child.on("exit", () => process.exit());
 };
 
 createDict();
