@@ -8,6 +8,7 @@ export default class Home extends React.Component {
   state = {
     movies: [],
     options: [],
+    overview: "",
     selectedWord: "",
   };
 
@@ -16,9 +17,15 @@ export default class Home extends React.Component {
   };
 
   handleSelect = (event) => {
-    this.setState({ selectedWord: event.target.value }, () => {
-      console.log(this.state.selectedWord);
-    });
+    this.setState(
+      {
+        selectedWord: event.target.value,
+        overview: this.state.overview + " " + event.target.value,
+      },
+      () => {
+        console.log(this.state.selectedWord);
+      }
+    );
   };
 
   componentDidMount() {
@@ -63,6 +70,7 @@ export default class Home extends React.Component {
             name="overview"
             id="overview"
             rows={10}
+            defaultValue={this.state.overview}
           ></textarea>
           <button className="new-movie__button" type="submit">
             Submit
