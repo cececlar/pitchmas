@@ -38,7 +38,7 @@ cd client && npm start
 
 ## About Pitchmas
 
-THe purpose of Pitchmas is twofold:
+The purpose of Pitchmas is twofold:
 
 1. Practice creating predictive text functionality for a specific corpus.
 2. Generate holiday movie pitch ideas that poke fun of the genre's most cringeworthy tropes.
