@@ -7,7 +7,7 @@ Run the following commands in a terminal window:
 ```bash
 git clone git@github.com:cececlar/pitchmas.git
 cd pitchmas && npm i
-cp .env.sample .env
+cp .env .env.sample
 cd client && npm i
 cd ..
 code .
