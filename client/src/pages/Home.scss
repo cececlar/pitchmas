@@ -36,4 +36,8 @@
   padding: 0.5rem;
   border-radius: 5px;
   border-color: lightblue;
+
+  &--punctuation {
+    background-color: lightgreen;
+  }
 }

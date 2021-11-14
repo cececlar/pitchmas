@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import socketIOClient from "socket.io-client";
 import "./Home.scss";
@@ -77,6 +77,30 @@ export default class Home extends React.Component {
           </button>
         </form>
         <div className="next-word__container">
+          <button
+            type="button"
+            className="next-word__button next-word__button--punctuation"
+            value="."
+            onClick={this.handleSelect}
+          >
+            .
+          </button>
+          <button
+            type="button"
+            className="next-word__button next-word__button--punctuation"
+            value="?"
+            onClick={this.handleSelect}
+          >
+            ?
+          </button>
+          <button
+            type="button"
+            className="next-word__button next-word__button--punctuation"
+            value="!"
+            onClick={this.handleSelect}
+          >
+            !
+          </button>
           {this.state.options.length > 0 &&
             this.state.options.map((option, index) => {
               return (
