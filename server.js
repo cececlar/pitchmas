@@ -39,7 +39,11 @@ io.on("connection", (socket) => {
     const index = optionsArray.findIndex((element) => element === data);
     console.log("Word selected: ", data);
     console.log("Index of word selected: ", index);
-    child.stdin.write(`${String(index)}\n`);
+    if (index !== -1) {
+      child.stdin.write(`${String(index)}\n`);
+    } else {
+      io.emit("options", optionsArray);
+    }
   });
 });
 
