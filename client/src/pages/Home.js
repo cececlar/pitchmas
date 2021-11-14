@@ -28,6 +28,10 @@ export default class Home extends React.Component {
     );
   };
 
+  handleKeyDown = (event) => {
+    event.preventDefault();
+  };
+
   componentDidMount() {
     this.socket = socketIOClient(ENDPOINT);
     this.socket.on("options", (data) => {
@@ -71,6 +75,7 @@ export default class Home extends React.Component {
             id="overview"
             rows={10}
             defaultValue={this.state.overview}
+            onKeyDown={this.handleKeyDown}
           ></textarea>
           <button className="new-movie__button" type="submit">
             Submit
