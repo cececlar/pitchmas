@@ -24,9 +24,6 @@ io.on("connection", (socket) => {
   const child = spawn("python", ["./script.py", overviews]);
   let optionsArray = [];
 
-  // child.stdout.pipe(process.stdout);
-  // child.stderr.pipe(process.stderr);
-  // process.stdin.pipe(child.stdin);
   child.stdout.on("data", (data) => {
     console.log(data.toString());
     optionsArray = data.toString().split("\n");
