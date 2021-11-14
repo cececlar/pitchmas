@@ -57,7 +57,7 @@ const writeDataToFile = (array) => {
   const overviews = array.reduce((a, b) => {
     return a + " " + b.overview;
   }, "");
-  fs.writeFile("overviews.json", JSON.stringify(overviews), (err) => {
+  fs.writeFile("overviews.txt", JSON.stringify(overviews), (err) => {
     if (err) {
       console.log(err);
     } else {
