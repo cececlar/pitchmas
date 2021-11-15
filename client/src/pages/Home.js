@@ -5,13 +5,15 @@ import "./Home.scss";
 const ENDPOINT = "http://127.0.0.1:8080";
 
 export default class Home extends React.Component {
-  state = {
+  initialState = {
     movies: [],
     options: [],
     title: "",
     overview: "",
     selectedWord: "",
   };
+
+  state = this.initialState;
 
   addMovie = (obj) => {
     console.log("Inside addMovie");
@@ -37,6 +39,14 @@ export default class Home extends React.Component {
 
   handleKeyDown = (event) => {
     event.preventDefault();
+  };
+
+  resetForm = (event) => {
+    this.setState(() => this.initialState);
+    this.socket = socketIOClient(ENDPOINT);
+    this.socket.on("options", (data) => {
+      this.setState({ options: data });
+    });
   };
 
   componentDidMount() {
@@ -130,9 +140,18 @@ export default class Home extends React.Component {
                 );
               })}
           </div>
-          <button className="new-movie__button" type="submit">
-            Submit
-          </button>
+          <div>
+            <button
+              className="new-movie__button"
+              type="reset"
+              onClick={this.resetForm}
+            >
+              Reset
+            </button>
+            <button className="new-movie__button" type="submit">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     );
