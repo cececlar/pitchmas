@@ -54,7 +54,6 @@ export default class Home extends React.Component {
   };
 
   shuffle = (event) => {
-    console.log("Inside shuffle");
     this.socket.emit("shuffle", "Please shuffle");
   };
 

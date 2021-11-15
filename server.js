@@ -25,14 +25,10 @@ io.on("connection", (socket) => {
   child.stdout.on("data", (data) => {
     optionsArray = data.toString().split("\n");
     optionsArray.pop();
-    console.log(typeof optionsArray);
-    console.log(optionsArray);
     io.emit("options", optionsArray);
   });
 
   socket.on("selected word", (data) => {
-    console.log(typeof data);
-    console.log(data);
     const index = optionsArray.findIndex((element) => element === data);
     if (index !== -1) {
       child.stdin.write(`${String(index)}\n`);
@@ -42,11 +38,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("shuffle", (data) => {
-    console.log(data);
-    optionsArray = optionsArray
+    optionsArray = overviews
+      .split(" ")
       .sort(() => Math.random() - Math.random())
       .slice(0, 20);
-    console.log(optionsArray);
     io.emit("options", optionsArray);
   });
 });
