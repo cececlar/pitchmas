@@ -8,6 +8,7 @@ export default class Home extends React.Component {
   state = {
     movies: [],
     options: [],
+    title: "",
     overview: "",
     selectedWord: "",
   };
@@ -26,6 +27,19 @@ export default class Home extends React.Component {
         console.log(this.state.selectedWord);
       }
     );
+  };
+
+  handleClick = (event) => {
+    console.log("Inside handleClick");
+    axios
+      .get("/api/movies/titles")
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ title: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   handleKeyDown = (event) => {
@@ -65,7 +79,16 @@ export default class Home extends React.Component {
             type="text"
             name="title"
             id="title"
+            onKeyDown={this.handleKeyDown}
+            defaultValue={this.state.title}
           ></input>
+          <button
+            type="button"
+            className="new-movie__button"
+            onClick={this.handleClick}
+          >
+            Generate random title
+          </button>
           <label className="new-movie__label" htmlFor="overview">
             Overview
           </label>
