@@ -44,11 +44,11 @@ export default class Home extends React.Component {
   handleDelete = (event) => {
     let overview = this.state.overview;
     overview = overview.split(" ");
-    const deletedWord = overview.pop();
     this.setState({
       selectedWord: overview[overview.length - 1],
       overview: overview.join(" "),
     });
+    this.socket.emit("shuffle", "Please shuffle");
   };
 
   shuffle = (event) => {
