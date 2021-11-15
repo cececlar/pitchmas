@@ -104,6 +104,14 @@ export default class Home extends React.Component {
             <button
               type="button"
               className="next-word__button next-word__button--punctuation"
+              value=","
+              onClick={this.handleSelect}
+            >
+              ,
+            </button>
+            <button
+              type="button"
+              className="next-word__button next-word__button--punctuation"
               value="."
               onClick={this.handleSelect}
             >
