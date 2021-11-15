@@ -41,23 +41,14 @@ io.on("connection", (socket) => {
     }
   });
 
-  // socket.on("deleted word", (data) => {
-  //   console.log(typeof data);
-  //   console.log(data);
-  //   console.log(optionsArray);
-  //   child.stdin.write(`${data}`);
-  //   io.emit("options", optionsArray);
-  //   // const index = optionsArray.findIndex((element) => element === data);
-  //   // if (index !== -1) {
-  //   //   console.log(`Word found! ${String(index)}`);
-  //   //   child.stdin.write(`${String(index)}\n`);
-  //   // } else {
-  //   //   console.log(
-  //   //     `Word not found! Here are your next word options: ${optionsArray}`
-  //   //   );
-  //   //   io.emit("options", optionsArray);
-  //   // }
-  // });
+  socket.on("shuffle", (data) => {
+    console.log(data);
+    optionsArray = optionsArray
+      .sort(() => Math.random() - Math.random())
+      .slice(0, 20);
+    console.log(optionsArray);
+    io.emit("options", optionsArray);
+  });
 });
 
 if (server) {

@@ -25,6 +25,12 @@
   width: 10rem;
   align-self: center;
   margin: 1rem;
+
+  &--shuffle {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+  }
 }
 
 .next-word__container {
@@ -45,5 +51,7 @@
 
   &--delete {
     background-color: red;
+    color: white;
+    font-weight: bold;
   }
 }

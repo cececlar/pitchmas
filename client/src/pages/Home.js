@@ -51,6 +51,11 @@ export default class Home extends React.Component {
     });
   };
 
+  shuffle = (event) => {
+    console.log("Inside shuffle");
+    this.socket.emit("shuffle", "Please shuffle");
+  };
+
   resetForm = (event) => {
     this.setState(() => this.initialState);
     this.socket = socketIOClient(ENDPOINT);
@@ -110,6 +115,13 @@ export default class Home extends React.Component {
             defaultValue={this.state.overview}
             onKeyDown={this.handleKeyDown}
           ></textarea>
+          <button
+            className="new-movie__button new-movie__button--shuffle"
+            type="button"
+            onClick={this.shuffle}
+          >
+            Shuffle options
+          </button>
           <div className="next-word__container">
             <button
               type="button"
