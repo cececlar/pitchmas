@@ -18,6 +18,11 @@ app.use(morgan("dev"));
 
 app.use("/api/movies", movieRoutes);
 
+if (process.env.NODE_ENV === "production") {
+  // Serve any static files
+  app.use(express.static(path.resolve(__dirname, "..", "client", "build")));
+}
+
 io.on("connection", (socket) => {
   const child = spawn("python", ["./script.py", overviews]);
   let optionsArray = [];
@@ -42,9 +47,22 @@ io.on("connection", (socket) => {
       .split(" ")
       .sort(() => Math.random() - Math.random())
       .slice(0, 20);
+    optionsArray = optionsArray.map((word) => {
+      word = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
+      return word;
+    });
     io.emit("options", optionsArray);
   });
 });
+
+if (process.env.NODE_ENV === "production") {
+  // Handle React routing, return all requests to React app
+  app.get("*", (request, response) => {
+    response.sendFile(
+      path.resolve(__dirname, "..", "client", "build", "index.html")
+    );
+  });
+}
 
 if (server) {
   console.log(`Express server running on port ${PORT}`);
