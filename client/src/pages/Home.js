@@ -85,7 +85,9 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="new-movie">
-        <h2>Create a holiday movie pitch below.</h2>
+        <h2 className="new-movie__header">
+          Create a holiday movie pitch below.
+        </h2>
         <form onSubmit={this.addMovie} className="new-movie__form">
           <label className="new-movie__label" htmlFor="title">
             Title

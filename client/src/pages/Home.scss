@@ -1,9 +1,19 @@
+button {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
 .new-movie {
   width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+}
+
+.new-movie__header {
+  color: #003e1f;
 }
 
 .new-movie__form {
@@ -15,6 +25,8 @@
 .new-movie__label {
   text-align: left;
   font-weight: bold;
+  color: #003e1f;
+  margin: 0.5rem 0;
 }
 
 .new-movie__input {
@@ -25,12 +37,9 @@
   width: 10rem;
   align-self: center;
   margin: 1rem;
-
-  &--shuffle {
-    background-color: blue;
-    color: white;
-    font-weight: bold;
-  }
+  background-color: #003e1f;
+  color: white;
+  font-weight: bold;
 }
 
 .next-word__container {
@@ -40,17 +49,14 @@
 
 .next-word__button {
   margin: 0.5rem;
-  background-color: lightblue;
-  padding: 0.5rem;
-  border-radius: 5px;
-  border-color: lightblue;
-
+  background-color: #d5f2e3;
   &--punctuation {
-    background-color: lightgreen;
+    background-color: #dcdfe5;
+    font-weight: bold;
   }
 
   &--delete {
-    background-color: red;
+    background-color: #ef233c;
     color: white;
     font-weight: bold;
   }
