@@ -241,29 +241,6 @@ def predwrite(D,num_opts,wtlist):
             response = int(response)
             if response >= 0 and response <= num_opts:
                 linelog = linelog + [str(rankings[response][0])]
-            # cur += 1
-            # printSentence(fullLog+linelog)
-        # elif response == 0:
-        #     print('Final output: ')
-        #     fullLog = fullLog + linelog
-        #     print(' '.join(fullLog))
-        #     return linelog
-        # elif response == 'x': #todo handle empty string case
-        #     del linelog[-1] # remove last element of current line
-        #     cur -= 1
-        #     printSentence(fullLog+linelog)
-        # elif response == '.' or response=='?' or response=='!': # starts a new sentence
-        #     linelog = linelog + [str(response)]
-        #     fullLog = fullLog + linelog
-        #     cur = 0
-            # printSentence(fullLog+linelog)
-        elif isinstance(response, str):
-            linelog = linelog + [response]
-            # cur += 1
-            # printSentence(fullLog+linelog)
-        # else:
-        #     print("Invalid input. Choose a number between 1 and " + str(num_opts) + " or enter a word present in the source")
-        #     printSentence(fullLog+linelog)
 
     print('\n')
     return
