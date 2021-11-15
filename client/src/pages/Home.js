@@ -18,23 +18,16 @@ export default class Home extends React.Component {
   };
 
   handleSelect = (event) => {
-    this.setState(
-      {
-        selectedWord: event.target.value,
-        overview: this.state.overview + " " + event.target.value,
-      },
-      () => {
-        console.log(this.state.selectedWord);
-      }
-    );
+    this.setState({
+      selectedWord: event.target.value,
+      overview: this.state.overview + " " + event.target.value,
+    });
   };
 
   handleClick = (event) => {
-    console.log("Inside handleClick");
     axios
       .get("/api/movies/titles")
       .then((res) => {
-        console.log(res.data);
         this.setState({ title: res.data });
       })
       .catch((err) => {
@@ -49,10 +42,7 @@ export default class Home extends React.Component {
   componentDidMount() {
     this.socket = socketIOClient(ENDPOINT);
     this.socket.on("options", (data) => {
-      console.log(typeof data);
-      this.setState({ options: data }, () => {
-        console.log(this.state.options);
-      });
+      this.setState({ options: data });
     });
   }
 

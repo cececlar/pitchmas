@@ -25,17 +25,13 @@ io.on("connection", (socket) => {
   let optionsArray = [];
 
   child.stdout.on("data", (data) => {
-    console.log(data.toString());
     optionsArray = data.toString().split("\n");
     optionsArray.pop();
-    console.log(optionsArray);
     io.emit("options", optionsArray);
   });
 
   socket.on("selected word", (data) => {
     const index = optionsArray.findIndex((element) => element === data);
-    console.log("Word selected: ", data);
-    console.log("Index of word selected: ", index);
     if (index !== -1) {
       child.stdin.write(`${String(index)}\n`);
     } else {
