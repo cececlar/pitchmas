@@ -257,10 +257,10 @@ def predwrite(D,num_opts,wtlist):
         #     fullLog = fullLog + linelog
         #     cur = 0
             # printSentence(fullLog+linelog)
-        # elif isinstance(response, str):
-        #     linelog = linelog + [response]
-        #     cur += 1
-        #     printSentence(fullLog+linelog)
+        elif isinstance(response, str):
+            linelog = linelog + [response]
+            # cur += 1
+            # printSentence(fullLog+linelog)
         # else:
         #     print("Invalid input. Choose a number between 1 and " + str(num_opts) + " or enter a word present in the source")
         #     printSentence(fullLog+linelog)

@@ -41,6 +41,16 @@ export default class Home extends React.Component {
     event.preventDefault();
   };
 
+  handleDelete = (event) => {
+    let overview = this.state.overview;
+    overview = overview.split(" ");
+    const deletedWord = overview.pop();
+    this.setState({
+      selectedWord: overview[overview.length - 1],
+      overview: overview.join(" "),
+    });
+  };
+
   resetForm = (event) => {
     this.setState(() => this.initialState);
     this.socket = socketIOClient(ENDPOINT);
@@ -101,6 +111,13 @@ export default class Home extends React.Component {
             onKeyDown={this.handleKeyDown}
           ></textarea>
           <div className="next-word__container">
+            <button
+              type="button"
+              className="next-word__button next-word__button--delete"
+              onClick={this.handleDelete}
+            >
+              Delete word
+            </button>
             <button
               type="button"
               className="next-word__button next-word__button--punctuation"
