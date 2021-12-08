@@ -2,7 +2,10 @@ import React from "react";
 import axios from "axios";
 import socketIOClient from "socket.io-client";
 import "./Home.scss";
-const ENDPOINT = "http://127.0.0.1:8080";
+const ENDPOINT =
+  process.env.NODE_ENV === "production"
+    ? window.location.hostname
+    : "http://localhost:8080";
 
 export default class Home extends React.Component {
   initialState = {
