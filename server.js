@@ -12,6 +12,7 @@ const morgan = require("morgan");
 const movieRoutes = require("./server/routes/movieRoutes");
 const { spawn } = require("child_process");
 const overviews = require("./overviews.json");
+const path = require("path");
 
 app.use(express.json());
 app.use(morgan("dev"));
